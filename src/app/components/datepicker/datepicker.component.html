@@ -1,0 +1,61 @@
+<div #btn (click)="openDatepicker()" class="btn-datepicker">
+  <span>{{ dateFilter?.start | date }} - {{ dateFilter?.end | date }}</span>
+  <img alt="calendar" height="12" ngSrc="/icons/calendar.svg" width="12">
+</div>
+
+<ng-template cdkPortal>
+  <div class="datepicker-container">
+    <div [formGroup]="formGroup" class="datepicker-side">
+      <div class="datepicker-type">
+        @for (type of dateTypeOptions; track type) {
+          <span
+            [class.active]="type === formGroup.get('type')?.value"
+            (click)="selectType(type)">
+            {{ type | customTitleCase }}
+          </span>
+        }
+      </div>
+      <div class="datepicker-shortcut">
+        <span (click)="shortcutLast30Days()" [class.disabled]="!isDay()">Last 30 days</span>
+        <span (click)="shortcutLast90Days()" [class.disabled]="!isDay()">Last 90 days</span>
+        <span (click)="shortcutLastYear()" [class.disabled]="!isDay()">Last year</span>
+        <span (click)="shortcutToday()" [class.disabled]="!isDay()">Today</span>
+      </div>
+      <div class="datepicker-input">
+        <input
+          formControlName="startDate"
+          type="text">
+        <input
+          formControlName="endDate"
+          type="text">
+      </div>
+      <div class="datepicker-input">
+        <input
+          formControlName="startTime"
+          type="time">
+        <input
+          formControlName="endTime"
+          type="time">
+      </div>
+      <div class="datepicker-button">
+        <button (click)="apply()" class="btn-apply">Apply</button>
+        <button (click)="cancel()" class="btn-cancel">Cancel</button>
+      </div>
+    </div>
+    <div class="datepicker-range">
+      <jhs-datepicker-calendar
+        (onSelectedDate)="onSelectedDate('start', $event)"
+        [calendarType]="formGroup.get('type')?.value"
+        [date]="formGroup.get('start')?.value"
+        [endDate]="formGroup.get('end')?.value"
+        label="Start"/>
+      <jhs-datepicker-calendar
+        (onSelectedDate)="onSelectedDate('end', $event)"
+        [calendarType]="formGroup.get('type')?.value"
+        [date]="formGroup.get('end')?.value"
+        [startDate]="formGroup.get('start')?.value"
+        label="End"/>
+    </div>
+  </div>
+
+</ng-template>

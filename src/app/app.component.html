@@ -1,0 +1,11 @@
+
+<h1>JHS's Datepicker</h1>
+
+<div>
+  <jhs-datepicker
+    (dateChanged)="onFilterChanged($event)"
+    [dateFilter]="dateFilter"></jhs-datepicker>
+</div>
+
+<strong>Start date : {{ dateFilter.start | date}}</strong>
+<strong>End date : {{ dateFilter.end | date}}</strong>
