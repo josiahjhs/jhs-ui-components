@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
 
+
+## Demo
+Available at [https://jhs-ui-components.austerie.com](https://jhs-ui-components.austerie.com)
+
 ## Run on Development server
 
 - Install `Nodejs` (version 20+)
